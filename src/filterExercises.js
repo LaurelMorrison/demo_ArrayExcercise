@@ -8,14 +8,14 @@ const instructors = useInstructors();
 // It should return an array of just the students who are in that cohort
 
 export const getStudentsInCohort = (cohort) => {
-    return students.filter(students => students.cohort === cohort)
+    return students.filter(student => student.cohort === cohort)
 }
 // Export a function called getFullTimeStudents
 // It should not accept any parameters
 // It should return an array of only the full time students
 
 export const getFullTimeStudents = () => {
-    return students.filter(students => students.fullTime === true)
+    return students.filter(student => student.fullTime === true)
 }
 
 // Export a function called getStudentsByInstructorId
@@ -23,7 +23,7 @@ export const getFullTimeStudents = () => {
 // It should return an array of students with that instructor
 
 export const getStudentsByInstructorId = (instructorId) => {
-    return students.filter(students => students.instructorId === instructorId)
+    return students.filter(student => student.instructorId === instructorId)
 }
 
 
@@ -34,7 +34,7 @@ export const getStudentsByInstructorId = (instructorId) => {
 
 export const getPolyglotStudents = (languageCount) => {
     if (languageCount >= 2) {
-        return students.filter(students => students.languages.length >= languageCount)
+        return students.filter(student => student.languages.length >= languageCount)
     }
 }
 
@@ -44,7 +44,7 @@ export const getPolyglotStudents = (languageCount) => {
 
 export const getAvailableInstructors = () => {
     if (students.instructorId != instructors.id)
-        return instructors.filter(instructors => instructors.name)
+        return instructors.filter(instructor => instructor.name)
     }
 
 // Export a function called getStudentsByLanguage
@@ -53,8 +53,7 @@ export const getAvailableInstructors = () => {
 // HINT: In addition to the `filter` method, you might also look up the `some` method
 
 export const getStudentsByLanguage = (language) => {
-    if (students.filter(students => students.languages === language))        
-        return students.some(language)
+    return students.filter.some(student => student.languages ===(language))        
 }
 
 /******** ADVANCED CHALLENGE ********/
