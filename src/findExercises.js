@@ -17,7 +17,7 @@ export const getStudentById = (id) => {
 // It should return the instructor object with the matching ID
 // Ex: getInstructorById(1)
 
-export const getInstructorById = (id) => {
+export let getInstructorById = (id) => {
     return instructors.find(instructor => instructor.id === id)
 }
 
@@ -27,8 +27,9 @@ export const getInstructorById = (id) => {
 // It should NOT be case sensitive
 // Ex: getStudentByName("sMiTh")
 
-export const getStudentByLastName = (lastName) => {
-    return students.find(student => student.lastName === lastName)
+export let getStudentByLastName = (lastName) => {
+    return students.find(student => 
+        student.lastName.toLowerCase() === lastName.toLowerCase())
 }
 
 // Export a function called getStudentByName
@@ -37,8 +38,11 @@ export const getStudentByLastName = (lastName) => {
 // It should NOT be case sensitive
 // Ex: getStudentByName("Summer SMITH")
 
-export const getStudentByName = (fullName) => {
-    return students.find(student => student.firstName && student.lastName === fullName)
+export let getStudentByName = (fullName) => {
+    return students.find(student => {
+        let studentName = student.firstName + " " + student.lastName 
+        return studentName.toLowerCase() === fullName.toLowerCase()
+    })
 }
 
 // Export a function called getInstructorOfStudent
@@ -47,8 +51,9 @@ export const getStudentByName = (fullName) => {
 // Ex: getInstructorOfStudent(4)      // returns Brenda Long
 
 export const getInstructorOfStudent = (studentId) => {
-    return instructors.find(student => student.instructorId === studentId)
-    }
+    return instructors.find(instructor => instructor.id === 
+        students.find(student => student.id === studentId).instructorId)
+}
 
 // Export a function called getStudentWithMostLangs
 // It should not accept any parameters
@@ -56,6 +61,22 @@ export const getInstructorOfStudent = (studentId) => {
 // Ex: getStudentWithMostLangs()      // returns Rick Sanchez
 // HINT: You may not need the `find` method for this. This is one of the few cases where a `for` loop might be appropriate
 
+// export const getStudentWithMostLangs = () => {
+//     let maxNumberOfLangs = 0;
+//     let studentWithMostLangs = {}
+//     for (let student of students) {
+//         if (student.languages.length > maxNumberOfLangs) {
+//             maxNumberOfLangs = student.languages.length
+//             studentWithMostLangs = student
+//         }
+//     }
+//     return studentWithMostLangs
+// }
+
+// export const getStudentWithMostLangs = () => {
+//     return students.find(student => student.name === Math.max.apply(student.languages.length)) 
+// }
+
 export const getStudentWithMostLangs = () => {
-    return students.find(student => student.name === Math.max.apply(student.languages.length)) 
+    return students.reduce((acc, cv) => cv.languages.length > acc.languages.length ? cv : acc)
 }

@@ -43,8 +43,9 @@ export const getPolyglotStudents = (languageCount) => {
 // It should return an array of instructors that don't have any students
 
 export const getAvailableInstructors = () => {
-    if (students.instructorId != instructors.id)
-        return instructors.filter(instructor => instructor.name)
+    let availableInstuctors = instructors.filter(instructor => 
+        !students.some(student => student.instructorId === instructor.id))
+        return availableInstuctors
     }
 
 // Export a function called getStudentsByLanguage
@@ -53,7 +54,7 @@ export const getAvailableInstructors = () => {
 // HINT: In addition to the `filter` method, you might also look up the `some` method
 
 export const getStudentsByLanguage = (language) => {
-    return students.filter.some(student => student.languages ===(language))        
+    return students.filter(student => student.languages.includes(language))        
 }
 
 /******** ADVANCED CHALLENGE ********/
